@@ -1,13 +1,39 @@
+import { EventEmitter, Injectable } from '@angular/core';
+
 import { Recipe } from './recipe.model';
+import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
+@Injectable()
 export class RecipeService {
-    recipes:Recipe[] = [
-        new Recipe('Meatball recipe', 'this is simply a test', 'https://www.cookingclassy.com/wp-content/uploads/2019/09/meatballs-21.jpg'),
-      new Recipe('Sri Lankan Chicken Curry', 'this is  a test', 'https://www.theflavorbender.com/wp-content/uploads/2018/02/Sri-Lankan-Chicken-Curry-The-Flavor-Bender-Featured-Image-SQ-2-500x500.jpg'),
-        new Recipe('Strawberry syrup', 'this istest', 'https://www.cookingclassy.com/wp-content/uploads/2018/04/strawberry-syrup-7-267x347.jpg')
-      ];
+  recipeSelected = new EventEmitter<Recipe>();
+ 
+  private recipes: Recipe[] = [
+    new Recipe(
+      'Tasty Schnitzel',
+      'A super-tasty Schnitzel - just awesome!',
+      'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
+      [
+        new Ingredient('Meat', 1),
+        new Ingredient('French Fries', 20)
+      ]),
+    new Recipe('Big Fat Burger',
+      'What else you need to say?',
+      'https://upload.wikimedia.org/wikipedia/commons/b/be/Burger_King_Angus_Bacon_%26_Cheese_Steak_Burger.jpg',
+      [
+        new Ingredient('Buns', 2),
+        new Ingredient('Meat', 1)
+      ])
+  ];
 
-      getRecipes(){
-          return this.recipes.slice();
-      }
+  constructor(private slService: ShoppingListService) {}
+
+  getRecipes() {
+    return this.recipes.slice();
+  }
+  
+
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.slService.addIngredients(ingredients);
+  }
 }
