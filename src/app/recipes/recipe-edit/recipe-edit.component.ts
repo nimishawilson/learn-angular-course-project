@@ -26,6 +26,7 @@ recipeForm: FormGroup;
         );
   }
 
+
   private initForm(){
     let recipeName = '';
     let recipeImagePath = '';
@@ -42,6 +43,10 @@ recipeForm: FormGroup;
       'imagePath': new FormControl(recipeImagePath),
       'description': new FormControl(recipeDescription)
     });
+  }
+
+    onSubmit(){
+    console.log(this.recipeForm);
   }
 
 }
