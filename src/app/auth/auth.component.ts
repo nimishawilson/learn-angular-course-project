@@ -31,24 +31,9 @@ export class AuthComponent {
          this.authService.signup(email,password).subscribe(resData => {
             console.log(resData);
             this.isLoading = false;
-        }, errorRes => {
-            console.log(errorRes);
-            switch (errorRes.error.error.message) {
-                case 'EMAIL_EXISTS':
-                  this.error = 'this email id already exists';
-                break;
-                 case 'OPERATION_NOT_ALLOWED':
-                  this.error = 'Password sign-in is disabled for this project';
-                break;
-                 case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-                  this.error = 'We have blocked all requests from this device due to unusual activity. Try again later.';
-                break;
-            
-                default:
-                this.error = ' An error occured';
-                    break;
-            }
-            
+        }, errorMessage => {
+            console.log(errorMessage);
+            this.error = errorMessage;
             this.isLoading = false;
         });
 
