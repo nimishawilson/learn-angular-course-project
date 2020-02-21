@@ -9,6 +9,7 @@ import { AuthService } from "./auth.service";
 export class AuthComponent {
     isLoginMode = true;
     isLoading = false;
+    error:string = null;
 
     constructor(private authService: AuthService){}
 
@@ -32,6 +33,7 @@ export class AuthComponent {
             this.isLoading = false;
         }, error => {
             console.log(error);
+            this.error = ' An error occured';
             this.isLoading = false;
         });
 
