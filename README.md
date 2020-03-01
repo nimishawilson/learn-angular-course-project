@@ -1,3 +1,5 @@
+[view application](https://recipesapp-2f70d.firebaseapp.com/recipes)
+
 # Courseproject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
